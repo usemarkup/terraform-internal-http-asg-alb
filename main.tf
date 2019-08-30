@@ -1,5 +1,3 @@
-provider "tls" {}
-
 provider "aws" {
   region = "${var.region}"
 }
@@ -11,7 +9,7 @@ data "aws_vpc" "vpc" {
 resource "aws_route53_record" "nlb_record" {
   zone_id = "${var.dns_zone_id}"
 
-  name = "${var.project}-nlb"
+  name = "${var.project}-alb"
   type = "A"
 
   alias {
