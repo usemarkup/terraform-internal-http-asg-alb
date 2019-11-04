@@ -113,6 +113,8 @@ resource "aws_autoscaling_group" "asg" {
   default_cooldown    = "${var.asg_default_cooldown}"
   vpc_zone_identifier = ["${var.private_subnet_ids}"]
   name                = "${var.project}-asg"
+  
+  health_check_type   = "ELB"
 
   termination_policies = [
     "OldestLaunchTemplate",
