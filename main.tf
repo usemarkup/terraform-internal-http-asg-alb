@@ -29,11 +29,6 @@ locals {
     MarkupTerraformReference = "${var.project}-alb"
     Name                     = "${var.project}-alb"
   }
-
-  asg_tags = {
-    MarkupTerraformReference = "${var.project}-asg"
-    Name                     = "${var.project}-asg"
-  }
 }
 
 resource "aws_security_group" "alb_sg" {
@@ -132,6 +127,18 @@ resource "aws_autoscaling_group" "asg" {
 
   lifecycle {
     create_before_destroy = true
+  }
+
+  tag {
+    key = "Name"
+    value = "${var.project}-asg"
+    propagate_at_launch = false
+  }
+
+  tag {
+    key = "MarkupTerraformReference"
+    value = "${var.project}-asg"
+    propagate_at_launch = false
   }
 }
 
